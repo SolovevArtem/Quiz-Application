@@ -105,7 +105,7 @@ section {
   width: 70%;
   padding: 1em;
   text-align: center;
-  font-size: 1.25rem≠;
+  font-size: 1.25rem;
   border-radius: 0.5em;
   background-color: #1c1b1f;
   border: 12px bold rgba(91, 65, 242, 0.5);
@@ -128,17 +128,12 @@ div.answer:hover{
 }
 
 
-
-.correct{
-  color:green;
-  mix-blend-mode: normal !important;
-  isolation: isolate;
+.cor{
+  display: flex !important;
 }
 
-
-.wrong{
-  color:red;
-  mix-blend-mode: normal !important;
+.wrn{
+  display: flex !important;
 }
 
 section {

@@ -3,7 +3,8 @@ const question = document.getElementById("question");
 const answers = Array.from(document.getElementsByClassName('answer-text'));
 const scoreTotal = document.getElementById("scoreTotal");
 const questionNo = document.getElementById("questionNo");
-const content = document.getElementById("app");
+const cor = document.getElementById("cor");
+const wrn = document.getElementById("wrn");
 
 //CONSTANT VARIABLES
 const BONUS = 10;
@@ -67,24 +68,29 @@ answers.forEach(choice=>{
             promise.then((selectedChoice)=>{
 
                 console.log(selectedChoice.dataset["option"], curQuestion.answer);
+                var result;
                 if(selectedChoice.dataset["option"]==curQuestion.answer){
-                    var classToApply = "correct";
+                    cor.classList.add("cor");
+                    result = true;
                 }else{
-                    var classToApply = "wrong";
+                    cor.classList.add("wrn");
+                    result = false;
                 }
-                console.log(classToApply);
+                
                 console.log(selectedChoice);
                
-                selectedChoice.classList.add(classToApply);
-                console.log(selectedChoice.parentElement.classList);
+                
                 setTimeout(()=>{
-                    selectedChoice.classList.remove(classToApply);
-                    if(classToApply === "correct"){
+                    
+                    if(result == true){
                         incrementScore(BONUS);
                         scoreTotal.innerHTML = score;
+                        cor.classList.remove("cor");
+                    }else{
+                        cor.classList.remove("wrn");
                     }
                     getQuestion();
-                },500);           
+                },2000);           
             })           
     });
 });
