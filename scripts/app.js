@@ -3,8 +3,8 @@ const question = document.getElementById("question");
 const answers = Array.from(document.getElementsByClassName('answer-text'));
 const scoreTotal = document.getElementById("scoreTotal");
 const questionNo = document.getElementById("questionNo");
-const cor = document.getElementById("cor");
-const wrn = document.getElementById("wrn");
+const feedback = document.getElementById("feedback");
+
 
 //CONSTANT VARIABLES
 const BONUS = 10;
@@ -68,28 +68,27 @@ answers.forEach(choice=>{
             promise.then((selectedChoice)=>{
 
                 console.log(selectedChoice.dataset["option"], curQuestion.answer);
-                var result;
+               
+                
+               
                 if(selectedChoice.dataset["option"]==curQuestion.answer){
-                    cor.classList.add("cor");
-                    result = true;
+                  
+                    score += BONUS;
+                    scoreTotal.innerHTML = score;
+                    feedback.innerHTML = "Correct";
+                    feedback.style.display = "flex";
                 }else{
-                    cor.classList.add("wrn");
-                    result = false;
+                    feedback.innerHTML = "Wrong";
+                    feedback.style.display = "flex";
                 }
                 
                 console.log(selectedChoice);
                
                 
                 setTimeout(()=>{
-                    
-                    if(result == true){
-                        incrementScore(BONUS);
-                        scoreTotal.innerHTML = score;
-                        cor.classList.remove("cor");
-                    }else{
-                        cor.classList.remove("wrn");
-                    }
-                    getQuestion();
+                        
+                        getQuestion();
+                        feedback.style.display = "none";
                 },2000);           
             })           
     });
@@ -102,7 +101,10 @@ startApp = () => {
     questionCounter = 0;
     score= 0;
     availableQuestions = [... questions];
+   
+   
     getQuestion();
+
 };
 
 getQuestion = () => {
