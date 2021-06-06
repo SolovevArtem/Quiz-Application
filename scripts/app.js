@@ -13,8 +13,11 @@ const QUESTION_LIMIT = 3;
 //VARIABLES     `   
 var curQuestion = {};
 var questionCounter = 0;
-var acceptingAnswers = false;
-var score = 0;
+var acceptingAnswers = false; 
+
+
+
+var score = 1; 
 var availableQuestions=[];
 var questions = [];
 
@@ -24,13 +27,21 @@ fetch(
 )
 .then(res=>{
     return res.json();
+    
+
 })
 .then(loadedQuestions=>{
     console.log(loadedQuestions.results);
+    console.log;
+    
+    
+    
     questions = loadedQuestions.results.map(loadedQuestion=>{
        
         const formattedQuestion = {
             question: loadedQuestion.question
+
+            
         };
 
         const answerOption = [... loadedQuestion.incorrect_answers];
@@ -40,11 +51,15 @@ fetch(
             0,
             loadedQuestion.correct_answer
         );
-
+        
         answerOption.forEach((choice,index)=>{
             formattedQuestion["choice"+(index+1)] = choice;
         });
         return formattedQuestion;
+        
+
+        
+        
     });
     startApp();
 })
